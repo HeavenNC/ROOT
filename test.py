@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 from time import sleep
 from bs4 import BeautifulSoup
 from humanfriendly import format_timespan, format_size, format_number, format_length
-import time, random, sys, json, codecs, threading, glob, re, string, os, requests, subprocess, six, ast, pytz, urllib, urllib.parse, ffmpy, wikipedia, atexit, datetime, pafy, youtube_dl, async
+import time, random, sys, json, codecs, threading, glob, re, string, os, requests, subprocess, six, ast, pytz, urllib, urllib.parse, ffmpy, wikipedia, atexit, datetime, pafy, youtube_dl, asyncio
 _session = requests.session()
 from gtts import gTTS
 from googletrans import Translator
@@ -30,6 +30,11 @@ temp_flood = {}
 groupName = {}
 groupImage = {}
 
+readOpen = codecs.open("read.json","r","utf-8")
+settingsOpen = codecs.open("temp.json","r","utf-8")
+imagesOpen = codecs.open("image.json","r","utf-8")
+stickersOpen = codecs.open("sticker.json","r","utf-8")
+
 read = json.load(readOpen)
 settings = json.load(settingsOpen)
 images = json.load(imagesOpen)
@@ -42,11 +47,6 @@ cont = client.getContact(clientMID)
 settings["myProfile"]["videoProfile"] = cont.videoProfile
 coverId = client.getProfileDetail()["result"]["objectId"]
 settings["myProfile"]["coverId"] = coverId
-
-readOpen = codecs.open("read.json","r","utf-8")
-settingsOpen = codecs.open("temp.json","r","utf-8")
-imagesOpen = codecs.open("image.json","r","utf-8")
-stickersOpen = codecs.open("sticker.json","r","utf-8")
 
 with open("/root/moeself/temp.json", "r", encoding="utf_8_sig") as f:
     anu = json.loads(f.read())
